@@ -49,6 +49,15 @@ public class FileParser {
 		}
 	}
 
+	/**
+	 * Get the ascii array
+	 * 
+	 * @return the ascii array
+	 */
+	public int[] getAscii() {
+		return ascii;
+	}
+
 	@Override
 	public String toString() {
 		return "FileParser [ascii=" + Arrays.toString(ascii) + "]";
