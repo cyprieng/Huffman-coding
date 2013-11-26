@@ -1,5 +1,7 @@
 package fr.utt.huffman.utils;
 
+import java.util.Arrays;
+
 /**
  * Class to make a QSort on an array
  * 
@@ -21,7 +23,8 @@ public class QSortArray {
 		}
 
 		// Launch QSort
-		int[] sortedArray = array;
+		int[] sortedArray = new int[array.length];
+		System.arraycopy(array, 0, sortedArray, 0, array.length);
 		quicksort(sortedArray, 0, sortedArray.length - 1);
 
 		return sortedArray;

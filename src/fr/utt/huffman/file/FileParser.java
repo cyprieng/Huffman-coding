@@ -1,7 +1,9 @@
 package fr.utt.huffman.file;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 
 /**
@@ -36,12 +38,14 @@ public class FileParser {
 	 *            The file to parse
 	 */
 	public void loadFile(String file) {
-		try (FileInputStream fis = new FileInputStream(file)) {
-			byte[] buf = new byte[8];
-			int n = 0;
-			while ((n = fis.read(buf)) >= 0) {
-				for (byte bit : buf) {
-					ascii[bit]++;
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					new FileInputStream(file)));
+
+			String str;
+			while ((str = br.readLine()) != null) {
+				for (int i = 0; i < str.length(); i++) {
+					ascii[(int) str.charAt(i)]++;
 				}
 			}
 

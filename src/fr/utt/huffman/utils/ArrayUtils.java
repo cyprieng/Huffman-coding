@@ -20,7 +20,7 @@ public class ArrayUtils {
 			if (array[i] != 0) {
 				// The value is not 0, and the array is sorted. So we just keep
 				// the end of the array
-				int[] arrayWithoutZero = new int[array.length - i - 1];
+				int[] arrayWithoutZero = new int[array.length - i];
 				System.arraycopy(array, i, arrayWithoutZero, 0,
 						arrayWithoutZero.length);
 				return arrayWithoutZero;
