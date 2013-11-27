@@ -15,9 +15,12 @@ public class ArrayUtils {
 	 * @return An array without 0
 	 */
 	public static int[] deleteZero(int[] array) {
+		if(array == null) //Test null array
+			return null;
+		
 		// We scan the array
 		for (int i = 0; i < array.length; i++) {
-			if (array[i] != 0) {
+			if (array[i] > 0) {
 				// The value is not 0, and the array is sorted. So we just keep
 				// the end of the array
 				int[] arrayWithoutZero = new int[array.length - i];
