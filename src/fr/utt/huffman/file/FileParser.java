@@ -45,7 +45,8 @@ public class FileParser {
 			String str;
 			while ((str = br.readLine()) != null) {
 				for (int i = 0; i < str.length(); i++) {
-					ascii[(int) str.charAt(i)]++;
+					if((int) str.charAt(i) <= 128) //Check if char is in standard ascii table
+						ascii[(int) str.charAt(i)]++;
 				}
 			}
 
