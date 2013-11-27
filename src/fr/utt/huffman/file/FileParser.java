@@ -48,7 +48,9 @@ public class FileParser {
 					if((int) str.charAt(i) <= 128) //Check if char is in standard ascii table
 						ascii[(int) str.charAt(i)]++;
 				}
+				ascii[10]++; //Increment \n char
 			}
+			ascii[10]--; //Delete the last \n
 
 		} catch (IOException e) {
 		}
