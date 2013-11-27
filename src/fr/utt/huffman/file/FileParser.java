@@ -28,7 +28,10 @@ public class FileParser {
 	 */
 	public FileParser(String file) {
 		ascii = new int[128];
-		loadFile(file);
+		
+		if(file != null){
+			loadFile(file);
+		}
 	}
 
 	/**
