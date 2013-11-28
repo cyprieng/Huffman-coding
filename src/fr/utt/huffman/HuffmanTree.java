@@ -57,9 +57,36 @@ public class HuffmanTree {
 		this.right = right;
 	}
 
+	/**
+	 * Print the HuffmanTree in the given StringBuilder
+	 * 
+	 * @param ht
+	 *            The HuffmanTree to print
+	 * @param level
+	 *            The level of the tree (Give 0)
+	 * @param str
+	 *            The StringBuilder in which the function will print
+	 */
+	public static void print(HuffmanTree ht, int level, StringBuilder str) {
+		if (ht != null) {
+			HuffmanTree.print(ht.right, level + 1, str); // Print right part
+
+			// Add tabulation for the level
+			for (int i = 0; i < level; i++) {
+				str.append("\t");
+			}
+
+			str.append(ht.ascii + "(" + ht.frequency + ")\n"); // Print the info
+																// of the cell
+
+			HuffmanTree.print(ht.left, level + 1, str); // Print the left part
+		}
+	}
+
 	@Override
 	public String toString() {
-		return "HuffmanTree [left=" + left + ", right=" + right + ", ascii="
-				+ ascii + ", frequency=" + frequency + "]";
+		StringBuilder str = new StringBuilder("");
+		print(this, 0, str);
+		return str.toString();
 	}
 }
