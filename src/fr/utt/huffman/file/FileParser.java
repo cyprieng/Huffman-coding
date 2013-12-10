@@ -54,7 +54,8 @@ public class FileParser {
 				ascii[10]++; //Increment \n char
 			}
 			ascii[10]--; //Delete the last \n
-
+			
+			br.close();
 		} catch (IOException e) {
 		}
 	}
