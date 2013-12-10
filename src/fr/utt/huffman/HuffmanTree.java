@@ -89,4 +89,40 @@ public class HuffmanTree {
 		print(this, 0, str);
 		return str.toString();
 	}
+
+	/**
+	 * Get the left part of the tree
+	 * 
+	 * @return The left part of the tree
+	 */
+	public HuffmanTree getLeft() {
+		return left;
+	}
+
+	/**
+	 * Get the right part of the tree
+	 * 
+	 * @return The right part of the tree
+	 */
+	public HuffmanTree getRight() {
+		return right;
+	}
+
+	/**
+	 * Get the ascii code of the node
+	 * 
+	 * @return The ascii code of the node
+	 */
+	public int getAscii() {
+		return ascii;
+	}
+
+	/**
+	 * Get the frequency of the node
+	 * 
+	 * @return The frequency of the node
+	 */
+	public int getFrequency() {
+		return frequency;
+	}
 }

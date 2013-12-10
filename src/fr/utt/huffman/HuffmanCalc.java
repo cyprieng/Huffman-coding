@@ -106,7 +106,7 @@ public class HuffmanCalc {
 			int total = freq[1] + freq[0]; // Total frequency
 
 			// Create a node linked to the two element of the index above
-			if (freq[0] > freq[1]) {
+			if (freq[0] < freq[1]) {
 				ht.add(new HuffmanTree(-1, total, ht.get(indexLeft), ht
 						.get(indexRight)));
 			} else {
