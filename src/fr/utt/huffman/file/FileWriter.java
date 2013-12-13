@@ -46,6 +46,11 @@ public class FileWriter {
 			for (int i = 0; i < originalContent.length(); i++) { // Parse the
 																	// original
 																	// file
+
+				// Check if the char is in ascii table
+				if ((int) originalContent.charAt(i) > 128)
+					continue;
+
 				for (int j = 0; j < charCoding[(int) originalContent.charAt(i)]
 						.length() - 1; j++) { // Parse the code of the char
 
