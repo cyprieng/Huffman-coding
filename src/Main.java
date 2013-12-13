@@ -38,11 +38,30 @@ public class Main {
 
 		// Encrypt
 		if (action == 1) {
-			// Calc and show Huffman Tree
+			long start = System.nanoTime();
+			
+			// Parse file
 			FileParser fp = new FileParser(path);
+			long parse = System.nanoTime() - start;
+			
+			//Init HuffmanCalc
 			HuffmanCalc hc = new HuffmanCalc(fp.getAscii());
+			long sort = System.nanoTime() - start - parse;
+			
+			//Calc huffman tree
 			HuffmanTree ht = hc.calcTree();
+			long calc = System.nanoTime() - start - parse - sort;
+			
+			long total = System.nanoTime() - start;
+			
+			//Print
+			System.out.println("\nTree:");
 			System.out.println(ht);
+			System.out.println("\nTime to parse: "+ ((double)(parse/100000)) + "ms");
+			System.out.println("Time to sort: "+ ((double)(sort/100000)) + "ms");
+			System.out.println("Time to calc tree: "+ ((double)(calc/100000)) + "ms");
+			System.out.println("---------------------------------------------------");
+			System.out.println("Total time: "+ ((double)(total/100000)) + "ms");
 
 			// Write file
 			BitSet ascii[] = new BitSet[128];
