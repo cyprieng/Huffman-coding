@@ -70,9 +70,9 @@ public class FileWriter {
 				}
 			}
 
-			// We have finished to write, but it remained some bits
+			// We have finished to write, but it may remain some bits
 			if (size != 0) {
-				// We put the bits to write at the begining of the byte
+				// We put the bits to write at the beginning of the byte
 				for (int k = 0; k < size; k++) {
 					buffer.set(7 - k, buffer.get(size - k - 1));
 					buffer.set(size - k - 1, false);
@@ -83,6 +83,16 @@ public class FileWriter {
 				bos.write(toWrite);
 				buffer = new BitSet();
 			}
+
+			// Create a mask
+			size = (size == 0) ? 8 : size;
+			for (int i = 7; i >= 8 - size; i--) {
+				buffer.set(i, true);
+			}
+
+			// Write the mask
+			byte toWrite[] = buffer.toByteArray();
+			bos.write(toWrite);
 
 			bos.close();
 			br.close();
