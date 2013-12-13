@@ -1,12 +1,16 @@
 package fr.utt.huffman;
 
+import java.io.Serializable;
+
 /**
  * Class to store the Hufmman tree
  * 
  * @author cyprien
  * 
  */
-public class HuffmanTree {
+public class HuffmanTree implements Serializable {
+	private static final long serialVersionUID = -22902415080253698L;
+
 	/**
 	 * Right and left part of the tree
 	 */

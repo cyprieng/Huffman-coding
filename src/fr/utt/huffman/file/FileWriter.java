@@ -17,7 +17,7 @@ import java.util.BitSet;
  */
 public class FileWriter {
 	/**
-	 * Write the coded original file in a new man
+	 * Write the coded original file in a new file
 	 * 
 	 * @param original
 	 *            The path of the original file
