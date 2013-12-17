@@ -32,8 +32,14 @@ public class FileWriter {
 
 			String originalContent = "";
 			String str;
+			boolean first = true;
 			while ((str = br.readLine()) != null) {
-				originalContent += str;
+				if (first) { // No \n if it is the first line
+					originalContent += str;
+					first = false;
+				} else {
+					originalContent += "\n" + str;
+				}
 			}
 
 			// Create the new file
