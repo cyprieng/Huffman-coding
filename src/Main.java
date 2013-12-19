@@ -1,11 +1,14 @@
+import java.io.FileNotFoundException;
 import java.util.BitSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import fr.utt.huffman.HuffmanCalc;
+import fr.utt.huffman.HuffmanReverseCalc;
 import fr.utt.huffman.HuffmanTree;
 import fr.utt.huffman.coding.CharCoding;
 import fr.utt.huffman.file.FileParser;
+import fr.utt.huffman.file.FileTreeReader;
 import fr.utt.huffman.file.FileTreeWriter;
 import fr.utt.huffman.file.FileWriter;
 
@@ -39,35 +42,60 @@ public class Main {
 		// Encrypt
 		if (action == 1) {
 			long start = System.nanoTime();
-			
+
 			// Parse file
 			FileParser fp = new FileParser(path);
 			long parse = System.nanoTime() - start;
-			
-			//Init HuffmanCalc
+
+			// Init HuffmanCalc
 			HuffmanCalc hc = new HuffmanCalc(fp.getAscii());
 			long sort = System.nanoTime() - start - parse;
-			
-			//Calc huffman tree
+
+			// Calc huffman tree
 			HuffmanTree ht = hc.calcTree();
 			long calc = System.nanoTime() - start - parse - sort;
-			
+
 			long total = System.nanoTime() - start;
-			
-			//Print
+
+			// Print
 			System.out.println("\nTree:");
 			System.out.println(ht);
-			System.out.println("\nTime to parse: "+ ((double)(parse/100000)) + "ms");
-			System.out.println("Time to sort: "+ ((double)(sort/100000)) + "ms");
-			System.out.println("Time to calc tree: "+ ((double)(calc/100000)) + "ms");
-			System.out.println("---------------------------------------------------");
-			System.out.println("Total time: "+ ((double)(total/100000)) + "ms");
+			System.out.println("\nTime to parse: "
+					+ ((double) (parse / 100000)) + "ms");
+			System.out.println("Time to sort: " + ((double) (sort / 100000))
+					+ "ms");
+			System.out.println("Time to calc tree: "
+					+ ((double) (calc / 100000)) + "ms");
+			System.out
+					.println("---------------------------------------------------");
+			System.out.println("Total time: " + ((double) (total / 100000))
+					+ "ms");
 
 			// Write file
 			BitSet ascii[] = new BitSet[128];
 			CharCoding.getBinaryCharCode(ht, 0, new BitSet(), ascii);
-			FileWriter.writeFile(path, ascii);
+			int fileLength = FileWriter.writeFile(path, ascii);
 			FileTreeWriter.writeTree(ht, path + ".tree");
+
+			// Show compression percent
+			double compressionPercent = ((double) ht.getFrequency() - (double) fileLength)
+					/ (double) ht.getFrequency() * 100;
+			System.out.println("\n\nCompressed by " + compressionPercent + "%");
+		} else {
+			long start = System.nanoTime();
+
+			// Get the huffman tree
+			HuffmanTree ht = FileTreeReader.readTree(path + ".tree");
+			System.out.println(ht);
+
+			// Decode
+			try {
+				HuffmanReverseCalc hrc = new HuffmanReverseCalc(path
+						+ ".huffman", ht);
+				System.out.println(hrc.getDecryptedHuffmanFile());
+			} catch (FileNotFoundException e) {
+			}
+
 		}
 	}
 }

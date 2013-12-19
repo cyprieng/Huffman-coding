@@ -23,8 +23,11 @@ public class FileWriter {
 	 *            The path of the original file
 	 * @param charCoding
 	 *            The BitSet array of code for each char
+	 * @return The byte length of the written file
 	 */
-	public static void writeFile(String original, BitSet[] charCoding) {
+	public static int writeFile(String original, BitSet[] charCoding) {
+		int fileLength = 0; // Size of the written file
+
 		try {
 			// Get the content of the original file
 			BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -76,6 +79,7 @@ public class FileWriter {
 						byte toWrite[] = buffer.toByteArray();
 						bos.write(toWrite);
 						buffer = new BitSet();
+						fileLength++;
 						size = 0;
 					}
 				}
@@ -93,6 +97,7 @@ public class FileWriter {
 				byte toWrite[] = buffer.toByteArray();
 				bos.write(toWrite);
 				buffer = new BitSet();
+				fileLength++;
 			}
 
 			// Create a mask
@@ -110,5 +115,7 @@ public class FileWriter {
 
 		} catch (IOException e) {
 		}
+
+		return fileLength;
 	}
 }
