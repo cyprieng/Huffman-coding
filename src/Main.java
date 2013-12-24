@@ -82,17 +82,20 @@ public class Main {
 					/ (double) ht.getFrequency() * 100;
 			System.out.println("\n\nCompressed by " + compressionPercent + "%");
 		} else {
-			long start = System.nanoTime();
-
 			// Get the huffman tree
 			HuffmanTree ht = FileTreeReader.readTree(path + ".tree");
 			System.out.println(ht);
 
 			// Decode
 			try {
+				long start = System.nanoTime();
 				HuffmanReverseCalc hrc = new HuffmanReverseCalc(path
 						+ ".huffman", ht);
+
 				System.out.println(hrc.getDecryptedHuffmanFile());
+				System.out.println("\n\nTime to decode: "
+						+ ((double) ((System.nanoTime() - start) / 100000))
+						+ "ms");
 			} catch (FileNotFoundException e) {
 			}
 
