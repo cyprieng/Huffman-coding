@@ -31,42 +31,14 @@ public class HuffmanCalc {
 	 *            The array[ascii] = freq
 	 */
 	public HuffmanCalc(int asciiFreq[]) {
-		freq = QSortArray.sort(asciiFreq);
-		freq = ArrayUtils.deleteZero(freq);
-		ascii = getAsciiFromFreq(asciiFreq, freq);
-	}
+		int size = asciiFreq.length;
+		int[] index = QSortArray.sort(asciiFreq);
+		freq = ArrayUtils.deleteZero(asciiFreq);
 
-	/**
-	 * Retrieve ascii from freq
-	 * 
-	 * @param asciiFreq
-	 *            The array[ascii] = freq
-	 * @param freq
-	 *            The sorted freq array
-	 * @return The ascii array where return[i] => freq[i]
-	 */
-	private int[] getAsciiFromFreq(int[] asciiFreq, int[] freq) {
-		int[] ascii = new int[freq.length];
-
-		for (int i = 0; i < ascii.length; i++) {
-			for (int j = 0; j < asciiFreq.length; j++) {
-				if (asciiFreq[j] == freq[i]) {
-					boolean change = true;
-					for (int k = 0; k <= i; k++) {
-						if (ascii[k] == j) {
-							change = false;
-						}
-					}
-
-					if (change) {
-						ascii[i] = j;
-						break;
-					}
-				}
-			}
-		}
-
-		return ascii;
+		// Delete the cells of index corresponding to 0 in freq
+		int diffSize = size - freq.length;
+		ascii = new int[freq.length];
+		System.arraycopy(index, diffSize, ascii, 0, freq.length);
 	}
 
 	/**
