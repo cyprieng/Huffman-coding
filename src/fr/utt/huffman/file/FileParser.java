@@ -27,7 +27,7 @@ public class FileParser {
 	 *            The file to parse
 	 */
 	public FileParser(String file) {
-		ascii = new int[128];
+		ascii = new int[256];
 		
 		if(file != null){
 			loadFile(file);
@@ -48,7 +48,7 @@ public class FileParser {
 			String str;
 			while ((str = br.readLine()) != null) {
 				for (int i = 0; i < str.length(); i++) {
-					if((int) str.charAt(i) <= 128) //Check if char is in standard ascii table
+					if((int) str.charAt(i) <= 256) //Check if char is in standard ascii table
 						ascii[(int) str.charAt(i)]++;
 				}
 				ascii[10]++; //Increment \n char

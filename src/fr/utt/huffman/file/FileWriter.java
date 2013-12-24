@@ -57,7 +57,7 @@ public class FileWriter {
 																	// file
 
 				// Check if the char is in ascii table
-				if ((int) originalContent.charAt(i) > 128)
+				if ((int) originalContent.charAt(i) > 256)
 					continue;
 
 				for (int j = 0; j < charCoding[(int) originalContent.charAt(i)]

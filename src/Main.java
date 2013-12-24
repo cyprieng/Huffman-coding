@@ -72,7 +72,7 @@ public class Main {
 					+ "ms");
 
 			// Write file
-			BitSet ascii[] = new BitSet[128];
+			BitSet ascii[] = new BitSet[256];
 			CharCoding.getBinaryCharCode(ht, 0, new BitSet(), ascii);
 			int fileLength = FileWriter.writeFile(path, ascii);
 			FileTreeWriter.writeTree(ht, path + ".tree");
