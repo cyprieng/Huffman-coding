@@ -8,6 +8,7 @@ import fr.utt.huffman.HuffmanReverseCalc;
 import fr.utt.huffman.HuffmanTree;
 import fr.utt.huffman.coding.CharCoding;
 import fr.utt.huffman.file.FileParser;
+import fr.utt.huffman.file.FileStringWriter;
 import fr.utt.huffman.file.FileTreeReader;
 import fr.utt.huffman.file.FileTreeWriter;
 import fr.utt.huffman.file.FileWriter;
@@ -81,6 +82,8 @@ public class Main {
 			double compressionPercent = ((double) ht.getFrequency() - (double) fileLength)
 					/ (double) ht.getFrequency() * 100;
 			System.out.println("\n\nCompressed by " + compressionPercent + "%");
+			
+			FileStringWriter.writeStringToFile(ht.toString(), "tree.txt");
 		} else {
 			// Get the huffman tree
 			HuffmanTree ht = FileTreeReader.readTree(path + ".tree");
@@ -92,10 +95,11 @@ public class Main {
 				HuffmanReverseCalc hrc = new HuffmanReverseCalc(path
 						+ ".huffman", ht);
 
-				System.out.println(hrc.getDecryptedHuffmanFile());
+				String str = hrc.getDecryptedHuffmanFile();
 				System.out.println("\n\nTime to decode: "
 						+ ((double) ((System.nanoTime() - start) / 100000))
 						+ "ms");
+				FileStringWriter.writeStringToFile(str, "decrypted.txt");
 			} catch (FileNotFoundException e) {
 			}
 
