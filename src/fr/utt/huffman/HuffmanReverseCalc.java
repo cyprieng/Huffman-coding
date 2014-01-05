@@ -164,7 +164,11 @@ public class HuffmanReverseCalc {
 
 			// The node of the tree is a char => write it in the StringBuilder
 			if (ht2.getAscii() != -1) {
-				decoded.append((char) ht2.getAscii());
+				if (ht2.getAscii() == 10) {
+					decoded.append(System.lineSeparator());
+				} else {
+					decoded.append((char) ht2.getAscii());
+				}
 				ht2 = this.ht;
 			}
 		}
